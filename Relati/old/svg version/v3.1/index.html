@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GridBoard Demo</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/Message.css">
+    <script src="js/GridBoard.js"></script>
+    <script src="js/addRelati.js"></script>
+</head>
+
+<body>
+    <div id="board-container"></div>
+    <div id="start-page" class="page">
+        <div id="game-title">Relati</div>
+        <div id="game-button">
+            <div id="game-start">開始遊戲</div>
+            <div id="game-rules">規則說明</div>
+        </div>
+    </div>
+    <div id="rules-page" class="page">
+        <ol>
+            <li>遊戲開始時，雙方分別在棋盤上選取空格並標上自己所持的符號</li>
+            <li>皆標記第一枚符號後，雙方輪流標記符號於空格，標記時，必須選擇有效符號作為來源進行連結</li>
+            <li>有效符號即第一枚符號，以及與第一枚符號連結的符號，與第一枚符號連結的符號連結的符號，依此類推，任何有效符號連結路徑必須能回朔至第一枚符號</li>
+            <li>當符號的連結路徑無法回朔至第一枚符號時，又稱為斷線，此類符號為無效符號，不可作為來源連結，當有其他符號作為來源與此連結時，將轉為有效符號</li>
+            <li>連結形式分為三種，如下
+                <ol>
+                    <li>一般連結</li>
+                    <li>遠程連結 連結經過的路徑必須為空格，否則該連結路徑無效</li>
+                    <li>遠程穩定連結 連結經過的路徑必須為空格，否則該連結路徑無效</li>
+                </ol>
+            </li>
+            <li>讓對方無法繼續標記符號取得勝利</li>
+        </ol>
+        <div id="rules-check">確認</div>
+    </div>
+    <footer>
+        <div id="game-restart">清除</div>
+    </footer>
+    <script src="js/main.js"></script>
+    <script src="js/Message.js"></script>
+    <script>
+        document.getElementById("game-start").addEventListener("click", function () {
+            gameStart(document.getElementById("board-container"));
+        });
+    </script>
+</body>
+
+</html>

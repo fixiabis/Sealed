@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Relati 規則</title>
+    <style>
+        body {
+            font-size: 18px;
+            padding: 10px;
+            margin: 0px;
+        }
+
+        h1 {
+            font-size: 45px;
+            margin: 10px;
+        }
+
+        h2 {
+            font-size: 30px;
+            margin: 15px;
+        }
+
+        h3 {
+            font-size: 25px;
+            margin: 20px;
+        }
+
+        ol {
+            padding-left: 30px;
+        }
+
+        label {
+            user-select: none;
+        }
+
+        select,
+        option {
+            font-size: inherit;
+            text-align: center;
+        }
+
+        #board {
+            width: 100%;
+            height: calc(100vh - 16px);
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <script src="js/GridBoard.js"></script>
+    <script src="js/RelatiGame.js"></script>
+    <script src="js/rule/RelatiRule.js"></script>
+    <script src="js/rule/BattleRule.js"></script>
+    <script src="js/rule/EscapeRule.js"></script>
+    <script src="js/rule/RegionRule.js"></script>
+    <script src="js/RelatiSkin.js"></script>
+</head>
+
+<body>
+    <main id="rules">
+        <h1>Relati</h1>
+        <ul>
+            <li>玩家:
+                <select id="player">
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select> 人
+            </li>
+            <li>棋盤大小: 玩家 * 2 + 11 平方</li>
+        </ul>
+        <h2>基本規則</h2>
+        <ul>
+            <li>標記符號於棋盤格時，必須為空格</li>
+            <li>標記符號(依照玩家順序)，如下圖
+                <div board="normal"></div>
+            </li>
+        </ul>
+        <h2>開始遊戲</h2>
+        <ul>
+            <li>所有玩家分別標記一枚符號於棋盤格中</li>
+            <li>開始的第一枚符號狀態為來源，如下圖
+                <div board="source"></div>
+            </li>
+        </ul>
+        <h2>進行遊戲</h2>
+        <ul>
+            <li>以下行為可擇一進行，進行後便換下一個玩家</li>
+            <li>除了第一枚符號，標記符號時需遵守
+                <a href="#relati">連結規範</a>
+                ，標記於可連結的位置</li>
+            <li>標記符號可依照
+                <a href="#escape">逃脫規範</a>
+                ，標記於可逃脫的位置</li>
+            <li>可選擇對方的符號，進行
+                <a href="#attack">攻擊行動</a>
+            </li>
+            <li>可選擇我方的符號，進行
+                <a href="#defend">防禦行動</a>
+            </li>
+            <li>可選擇我方的符號，進行
+                <a href="#bomber">轟炸行動</a>
+            </li>
+        </ul>
+        <h2>勝負判定</h2>
+        <ul>
+            <li>當玩家無法標記符號時判定為淘汰，最後一位玩家為本局遊戲的贏家</li>
+        </ul>
+        <h2 id="relati">連結規範</h2>
+        <ul>
+            <li>一般連結，如下圖，可參考紅線
+                <div board="relati-normal"></div>
+            </li>
+            <li>遠程連結，如下圖，可參考紅線，紅線經過的位置必須為空格
+                <div board="relati-remote"></div>
+            </li>
+            <li>遠程穩定連結，如下圖，可參考紅線，紅線經過的位置必須為空格
+                <div board="relati-remote-stable"></div>
+            </li>
+            <li>連結阻斷，如下圖
+                <div board="relati-forbid"></div>
+                若符號無法與來源符號直接或是間接連結時，狀態轉為阻斷
+                <br> 狀態為阻斷、防盾、死亡的符號，在標記符號時，不能作為連結的來源
+                <br> 若符號能與來源符號直接或是間接連結時，狀態轉為一般
+                <br> 符號狀態為阻斷，如下圖
+                <div board="forbid"></div>
+            </li>
+        </ul>
+        <h2 id="escape">逃脫規範</h2>
+        <ul>
+            <li>如下圖，可參考紅線，紅線經過的位置必須為空格
+                <div board="escape"></div>
+                可逃脫於我方符號8個方位不限距離長處
+                <br> 放置後符號狀態為來源，除了狀態為防盾的符號，其他符號狀態轉為死亡
+                <br> 狀態為阻斷、防盾、死亡的符號，在標記符號時，不能作為逃脫的來源
+                <br> 符號狀態為死亡，如下圖
+                <div board="broken"></div>
+            </li>
+        </ul>
+        <h2 id="attack">攻擊行動</h2>
+        <ul>
+            <li>如下圖，可參考紅線，紅線經過的位置必須為空格或我方符號
+                <div board="attack"></div>
+                可攻擊他方符號於我方符號8個方位不限距離長處
+                <br> 攻擊方向的反方向一格需有我方的一般符號作為耗材
+                <br> 攻擊後他方符號狀態轉為死亡，我方需選擇耗材，狀態轉為死亡
+                <br> 狀態為防盾、死亡的符號，在攻擊符號時，不能作為攻擊的媒介
+                <br> 耗材的選擇，如下圖
+                <div board="select"></div>
+            </li>
+        </ul>
+        <h2 id="defend">防禦行動</h2>
+        <ul>
+            <li>若我方符號狀態為一般，狀態轉為防盾
+                <br> 狀態為防盾，如下圖
+                <div board="shield"></div>
+            </li>
+        </ul>
+        <h2 id="bomber">轟炸行動</h2>
+        <ul>
+            <li>如下圖
+                <div board="bomber"></div>
+                若我方符號狀態為防盾，狀態轉為死亡
+                <br> 若該符號八方有符號，皆變更為死亡符號
+            </li>
+        </ul>
+        <h2 id="pincer">夾擊機能</h2>
+        <ul>
+            <li>如下圖
+                <div board="pincer"></div>
+                他方符號正四方或斜四方皆為我方符號時，他方符號狀態轉為死亡
+            </li>
+        </ul>
+        <h2 id="region">區域機能</h2>
+        <ul>
+            <li>如下圖
+                <div board="region"></div>
+                由我方四個非死亡符號圍成矩型
+                <br> 區域內部的對方符號不能進行攻擊行動
+                <br> 區域內部的我方符號不會被作為攻擊對象
+            </li>
+        </ul>
+        <h2>規則調整</h2>
+        <h3>連結規範</h3>
+        <ul list="relati"></ul>
+        <h3>逃脫規範</h3>
+        <ul list="escape"></ul>
+        <h3>攻擊行動</h3>
+        <ul list="attack"></ul>
+        <h3>防禦行動</h3>
+        <ul list="defend"></ul>
+        <h3>轟炸行動</h3>
+        <ul list="bomber"></ul>
+        <h3>夾擊機能</h3>
+        <ul list="pincer"></ul>
+        <h3>區域機能</h3>
+        <ul list="region"></ul>
+        <input type="button" value="開始遊戲" id="start-game">
+        <input type="button" value="以基本規則開始遊戲" id="start-game-basic">
+        <input type="button" value="以進階規則開始遊戲" id="start-game-extra">
+        <main id="board"></main>
+    </main>
+    <script src="js/board-image/creator.js"></script>
+    <script src="js/board-image/status.js"></script>
+    <script src="js/board-image/relati-normal.js"></script>
+    <script src="js/board-image/relati-remote.js"></script>
+    <script src="js/board-image/relati-remote-stable.js"></script>
+    <script src="js/board-image/relati-forbid.js"></script>
+    <script src="js/board-image/escape.js"></script>
+    <script src="js/board-image/attack.js"></script>
+    <script src="js/board-image/bomber.js"></script>
+    <script src="js/board-image/pincer.js"></script>
+    <script src="js/board-image/region.js"></script>
+    <script src="js/config-list/creator.js"></script>
+    <script src="js/config-list/relati.js"></script>
+    <script src="js/config-list/escape.js"></script>
+    <script src="js/config-list/attack.js"></script>
+    <script src="js/config-list/defend.js"></script>
+    <script src="js/config-list/bomber.js"></script>
+    <script src="js/config-list/pincer.js"></script>
+    <script src="js/config-list/region.js"></script>
+    <script>
+        (function () {
+            document.getElementById("start-game").onclick = function custom() {
+                var options = {};
+                var optionUse = [
+                    "relati-normal",
+                    "relati-remote",
+                    "relati-remote-stable",
+                    "relati-forbid",
+                    "escape",
+                    "attack",
+                    "defend",
+                    "bomber",
+                    "pincer",
+                    "region",
+                    "region-forbid",
+                    "region-forbid-attack"
+                ];
+                var option = {
+                    source: [
+                        "relati",
+                        "escape",
+                        "defend",
+                        "bomber",
+                        "pincer",
+                        "region"
+                    ],
+                    route: [
+                        "relati",
+                        "escape",
+                        "attack"
+                    ],
+                    target: [
+                        "attack",
+                        "pincer",
+                        "bomber"
+                    ],
+                    medium: ["attack"],
+                    bullet: ["attack"],
+                    dir: ["pincer"],
+                    rule: ["region"]
+                };
+
+                optionUse.forEach(function (name) {
+                    name = `use-${name}`;
+                    options[name] = document.getElementById(name).checked
+                });
+
+                for (var type in option) {
+                    option[type].forEach(function (name) {
+                        name = `${name}-${type}`;
+                        options[name] = (
+                            ["source", "bullet", "medium"].includes(type)
+                                ? "owner " + Array.prototype.map.call(
+                                    document.querySelectorAll(`[name=${name}]:checked`),
+                                    element => element.value
+                                ).join("|owner ")
+                                : type === "target"
+                                    ? "other " + Array.prototype.map.call(
+                                        document.querySelectorAll(`[name=${name}]:checked`),
+                                        element => element.value
+                                    ).join("|other ")
+                                    : Array.prototype.map.call(
+                                        document.querySelectorAll(`[name=${name}]:checked`),
+                                        element => element.value
+                                    ).join("|")
+                        );
+                    });
+                }
+
+                var game = new RelatiGame(2, document.getElementById("board"));
+                game.board.viewerRefresh();
+                addSkinOn(game.board, game);
+                window.game = game;
+
+                addAttackRule(game, options);
+                addBomberRule(game, options);
+                addPincerRule(game, options);
+                addDefendRule(game, options);
+                addRegionRule(game, options);
+                addRelatiRule(game, options);
+                addEscapeRule(game, options);
+            };
+            document.getElementById("start-game-basic").onclick = function () {
+                var game = new RelatiGame(2, document.getElementById("board"));
+                game.board.viewerRefresh();
+                addSkinOn(game.board, game);
+                window.game = game;
+
+                addRelatiRule(game, {
+                    "use-relati-normal": true,
+                    "relati-source": "owner valid"
+                });
+            };
+            document.getElementById("start-game-extra").onclick = function () {
+                var game = new RelatiGame(2, document.getElementById("board"));
+                game.board.viewerRefresh();
+                addSkinOn(game.board, game);
+                window.game = game;
+
+                addRelatiRule(game, {
+                    "use-relati-normal": true,
+                    "use-relati-remote": true,
+                    "use-relati-remote-stable": true,
+                    "use-relati-forbid": true,
+                    "relati-source": "owner valid",
+                    "relati-route": "space"
+                });
+            };
+        })();
+    </script>
+</body>
+
+</html>

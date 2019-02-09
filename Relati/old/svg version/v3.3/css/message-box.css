@@ -1,0 +1,157 @@
+[id^=message] {
+    box-sizing: border-box;
+}
+
+#message-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    background-color: #f2f2f2;
+    width: 300px;
+    height: 200px;
+    position: absolute;
+    top: 100%;
+    left: calc((100% - 300px) / 2);
+    border-radius: 5px;
+    border-style: solid;
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+#message-box.active {
+    top: calc((100% - 200px) / 2);
+    opacity: 1;
+}
+
+#message-box:not(.active) .button-container {
+    display: none;
+}
+
+#message-box .button {
+    transform: scale(0.8);
+}
+
+#message-box .button:active {
+    transform: scale(0.6);
+}
+
+#message-title>div{
+    display: none;
+    width: 100%;
+    height: 80px;
+}
+
+#message-box.load #message-load {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#message-load div {
+    background-color: #666;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    margin: 0px 10px;
+}
+
+#message-load div:nth-child(1) {
+    animation: show-for-dot-1 1.5s infinite;
+}
+
+#message-load div:nth-child(2) {
+    animation: show-for-dot-2 1.5s infinite;
+}
+
+#message-load div:nth-child(3) {
+    animation: show-for-dot-3 1.5s infinite;
+}
+
+#message-box.load .button-container {
+    display: none;
+}
+
+#message-box.confirm #message-confirm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#message-box.winner #message-winner {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 180px;
+}
+
+#message-winner div {
+    display: none;
+    width: 60px;
+    height: 60px;
+}
+
+#message-box.draw .source-O, 
+#message-box.draw .source-X,
+#message-box.O-win .source-O, 
+#message-box.X-win .source-X,
+#message-box.X-win .forbid-O, 
+#message-box.O-win .forbid-X {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#message-box.your-sym #message-your-sym {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 180px;
+}
+
+#message-your-sym div {
+    display: none;
+    width: 60px;
+    height: 60px;
+}
+
+#message-your-sym #your-image {
+    display: flex;
+    border-radius: 60px;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #888;
+    background-color: #888;
+    background-size: contain;
+    background-position: center;
+}
+
+#message-box.is-O .normal-O,
+#message-box.is-X .normal-X {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#message-box.your-sym #message-accept {
+    display: none;
+}
+
+@keyframes show-for-dot-1 {
+    25% {
+        opacity: 0;
+    }
+}
+
+@keyframes show-for-dot-2 {
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes show-for-dot-3 {
+    75% {
+        opacity: 0;
+    }
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Demo</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/Message.css">
+    <script src="js/socket.io.js"></script>
+    <script src="js/GameArena.js"></script>
+    <script src="js/GridBoard.js"></script>
+    <script src="js/SymtusBoard.js"></script>
+    <script src="js/RelatiBoard.js"></script>
+</head>
+
+<body>
+    <div id="header">
+        <div id="player1"></div>
+        vs
+        <div id="player2"></div>
+    </div>
+    <div id="container">
+        <div id="sample-container" class="page"></div>
+        <div id="board-container" class="page"></div>
+        <div id="start-page" class="page">
+            <div id="game-title">Relati</div>
+            <div id="game-button">
+                <div id="game-start" class="button">
+                    <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 10 10 L 40 25 L 10 40 Z" fill="#f2f2f2"></path>
+                    </svg>
+                </div>
+                <div id="game-rules" class="button">
+                    <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 17 20.5 A 8 8 0 1 1 25 28.5 V 32.5" stroke="#f2f2f2" stroke-width="5" fill="none"></path>
+                        <circle cx="25" cy="37.5" r="3" fill="#f2f2f2"></circle>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div id="game-exit" class="button">
+            <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 25 15 V 5 H 5 V 45 H 25 V 35" stroke-width="5" stroke="#f2f2f2" fill="none"></path>
+                <path d="M 15 25 H 45" stroke-width="5" stroke="#f2f2f2" fill="none"></path>
+                <path d="M 35 15 L 45 25 L 35 35" stroke-width="5" stroke="#f2f2f2" fill="none"></path>
+            </svg>
+        </div>
+    </div>
+    <div id="message-box">
+        <div id="message-sign">
+            <div id="user-loading">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div id="user-win-or-lose">
+                <div id="O-normal">
+                    <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="25" cy="25" r="15" stroke-width="5" stroke="crimson" fill="none"></circle>
+                    </svg>
+                </div>
+                <div id="O-source">
+                    <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="25" cy="25" r="15" stroke-width="10" stroke="crimson" fill="none"></circle>
+                        <circle cx="25" cy="25" r="15" stroke-width="5" stroke="#f2f2f2" fill="none"></circle>
+                    </svg>
+                </div>
+                <div id="O-forbid">
+                    <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="25" cy="25" r="15" stroke-width="5" stroke="#666" fill="none"></circle>
+                    </svg>
+                </div>
+                <div id="X-normal">
+                    <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 10 10 L 40 40" stroke-width="5" stroke="royalblue"></path>
+                        <path d="M 10 40 L 40 10" stroke-width="5" stroke="royalblue"></path>
+                    </svg>
+                </div>
+                <div id="X-source">
+                    <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 10 10 L 40 40" stroke-width="10" stroke="royalblue"></path>
+                        <path d="M 10 40 L 40 10" stroke-width="10" stroke="royalblue"></path>
+                        <path d="M 10 10 L 40 40" stroke-width="5" stroke="#f2f2f2"></path>
+                        <path d="M 10 40 L 40 10" stroke-width="5" stroke="#f2f2f2"></path>
+                    </svg>
+                </div>
+                <div id="X-forbid">
+                    <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 10 10 L 40 40" stroke-width="5" stroke="#666"></path>
+                        <path d="M 10 40 L 40 10" stroke-width="5" stroke="#666"></path>
+                    </svg>
+                </div>
+            </div>
+            <div id="user-sign" class="symbol-O">
+                <div id="player-image"></div>
+                <div id="symbol-O">
+                    <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="25" cy="25" r="15" stroke-width="5" stroke="crimson" fill="none"></circle>
+                    </svg>
+                </div>
+                <div id="symbol-X">
+                    <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 10 10 L 40 40" stroke-width="5" stroke="royalblue"></path>
+                        <path d="M 10 40 L 40 10" stroke-width="5" stroke="royalblue"></path>
+                    </svg>
+                </div>
+            </div>
+            <div id="user-confirm">
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 17 20.5 A 8 8 0 1 1 25 28.5 V 32.5" stroke="#666" stroke-width="5" fill="none"></path>
+                    <circle cx="25" cy="37.5" r="3" fill="#666"></circle>
+                </svg>
+            </div>
+        </div>
+        <div id="message-button">
+            <div id="message-accept" class="button">
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="25" cy="25" r="15" stroke-width="5" stroke="#f2f2f2" fill="none"></circle>
+                </svg>
+            </div>
+            <div id="message-reject" class="button">
+                <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 10 10 L 40 40" stroke-width="5" stroke="#f2f2f2"></path>
+                    <path d="M 10 40 L 40 10" stroke-width="5" stroke="#f2f2f2"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <script src="js/Message.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/sample-keyframe.js"></script>
+    <script>
+        gameStart(
+            document.getElementById("game-start"),
+            document.getElementById("board-container")
+        );
+    </script>
+</body>
+
+</html>

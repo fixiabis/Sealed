@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GridBoard Demo</title>
+    <link rel="stylesheet" href="css/Message.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/socket.io.js"></script>
+    <script src="js/GameArena.js"></script>
+    <script src="js/GridBoard.js"></script>
+    <script src="js/signOXDUA.js"></script>
+</head>
+
+<body>
+    <header>
+        <div id="player1"></div>
+        vs
+        <div id="player2"></div>
+    </header>
+    <div id="board"></div>
+    <script src="js/main.js"></script>
+    <script>
+        gameStart(document.getElementById("board"), { name: "a", picUrl: "a" });
+    </script>
+    <script src="js/Message.js"></script>
+</body>
+
+</html>

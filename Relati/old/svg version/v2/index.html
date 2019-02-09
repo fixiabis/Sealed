@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link href="logo.png" rel="shortcut icon">
+    <title>Relati</title>
+    <script src="js/GridBoard.js"></script>
+    <script src="js/RelatiGame.js"></script>  
+    <style>
+        @import "css/main.css";
+    </style>
+</head>
+
+<body>
+    <div id="board-page" class="page"></div>
+    <div id="show-rules">
+        <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+            <g>
+                <path id="line1" d="M 17 20.5 A 8 8 0 1 1 25 28.5 V 32.5" stroke="#888" stroke-width="2" fill="none"></path>
+                <path id="line2" d="M 25 34.5 V 37.5" stroke="#888" stroke-width="2" fill="none"></path>
+            </g>
+        </svg>
+    </div>
+    <div id="game-rules" class="page hide">
+        <div>
+            <div>
+                遊戲開始時，雙方分別標記一枚符號於棋盤格子中
+                <br>之後，雙方輪流標記符號於自己符號的附近(下圖灰色圓圈符號的位置)
+                <div id="near-of-symbol">
+                    <svg width="100" height="100">
+                        <path stroke-width="1" d="M 20 0 V 100" stroke="#888"></path>
+                        <path stroke-width="1" d="M 40 0 V 100" stroke="#888"></path>
+                        <path stroke-width="1" d="M 60 0 V 100" stroke="#888"></path>
+                        <path stroke-width="1" d="M 80 0 V 100" stroke="#888"></path>
+                        <path stroke-width="1" d="M 0 20 H 100" stroke="#888"></path>
+                        <path stroke-width="1" d="M 0 40 H 100" stroke="#888"></path>
+                        <path stroke-width="1" d="M 0 60 H 100" stroke="#888"></path>
+                        <path stroke-width="1" d="M 0 80 H 100" stroke="#888"></path>
+                        <circle stroke-width="2" cx="50" cy="50" r="6" stroke="#dc143c" fill="none"></circle>
+                        <circle stroke-width="2" cx="70" cy="50" r="6" stroke="#bbb" fill="none"></circle>
+                        <circle stroke-width="2" cx="70" cy="70" r="6" stroke="#bbb" fill="none"></circle>
+                        <circle stroke-width="2" cx="50" cy="70" r="6" stroke="#bbb" fill="none"></circle>
+                        <circle stroke-width="2" cx="30" cy="70" r="6" stroke="#bbb" fill="none"></circle>
+                        <circle stroke-width="2" cx="30" cy="50" r="6" stroke="#bbb" fill="none"></circle>
+                        <circle stroke-width="2" cx="30" cy="30" r="6" stroke="#bbb" fill="none"></circle>
+                        <circle stroke-width="2" cx="50" cy="30" r="6" stroke="#bbb" fill="none"></circle>
+                        <circle stroke-width="2" cx="70" cy="30" r="6" stroke="#bbb" fill="none"></circle>
+                    </svg>
+                </div>
+                對方無法標記符號時，即判我方勝利(佔滿棋盤時判平手)
+            </div>
+        </div>
+    </div>
+    <div id="hide-rules" class="hide">
+        <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+            <g>
+                <path d="M 10 10 L 40 40" stroke="#888" stroke-width="2" fill="none"></path>
+                <path d="M 40 10 L 10 40" stroke="#888" stroke-width="2" fill="none"></path>
+            </g>
+        </svg>
+    </div>
+    <div id="message-box" class="hide">
+        <div id="message"></div>
+        <div id="message-button">確認</div>
+    </div>
+    <script src="js/showMessage.js"></script>
+    <script>
+        (function (container) {
+            var game = new RelatiGame();
+            game.board.viewerIn(container);
+
+            var gameRulePage = document.getElementById("game-rules");
+            var showRuleButton = document.getElementById("show-rules");
+            var hideRuleButton = document.getElementById("hide-rules");
+
+            showRuleButton.addEventListener("click", function () {
+                show(gameRulePage);
+                show(hideRuleButton);
+            });
+
+            hideRuleButton.addEventListener("click", function () {
+                hide(gameRulePage);
+                hide(hideRuleButton);
+            });
+
+            function hide(element) { element.style.display = "none"; }
+            function show(element) { element.style.display = "block"; }
+        })(document.getElementById("board-page"));
+    </script>
+</body>
+
+</html>

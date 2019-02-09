@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Board</title>
+    <style>
+        body {
+            display: flex;
+            background-color: #f2f2f2;
+            align-items: center;
+            justify-content: center;
+            margin: 0px;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <svg width="75" height="45" style="transform: scale(18)">
+        <g stroke="#888" stroke-width="0.2" fill="none">
+            <g id="vertical-line">
+                <path d="M  5 0 V 45"></path>
+                <path d="M 10 0 V 45"></path>
+                <path d="M 15 0 V 45"></path>
+                <path d="M 20 0 V 45"></path>
+                <path d="M 25 0 V 45"></path>
+                <path d="M 30 0 V 45"></path>
+                <path d="M 35 0 V 45"></path>
+                <path d="M 40 0 V 45"></path>
+                <path d="M 45 0 V 45"></path>
+                <path d="M 50 0 V 45"></path>
+                <path d="M 55 0 V 45"></path>
+                <path d="M 60 0 V 45"></path>
+                <path d="M 65 0 V 45"></path>
+                <path d="M 70 0 V 45"></path>
+            </g>
+            <g id="horizon-line">
+                <path d="M 0  5 H 75"></path>
+                <path d="M 0 10 H 75"></path>
+                <path d="M 0 15 H 75"></path>
+                <path d="M 0 20 H 75"></path>
+                <path d="M 0 25 H 75"></path>
+                <path d="M 0 30 H 75"></path>
+                <path d="M 0 35 H 75"></path>
+                <path d="M 0 40 H 75"></path>
+            </g>
+        </g>
+        <g class="blood" fill="none">
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="lightgray" stroke-width="0.4" stroke-dashoffset="-0.1" stroke-dasharray="1.6849555921538759 0.2"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="royalblue" stroke-width="0.4" stroke-dashoffset="-0.1" stroke-dasharray="
+                0 1.8849555921538759
+                0 1.8849555921538759
+                1.6849555921538759 0.2
+                1.6849555921538759 0.2
+                1.6849555921538759 0.2
+                1.6849555921538759 0.2"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="gold" stroke-width="0.6" stroke-dashoffset="-0.1" stroke-dasharray="
+                0 1.8849555921538759
+                1.6849555921538759 0.2
+                0 1.8849555921538759
+                0 1.8849555921538759
+                0 1.8849555921538759
+                0 1.8849555921538759"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="violet" stroke-width="0.6" stroke-dashoffset="-0.1" stroke-dasharray="
+                1.6849555921538759 0.2
+                0 1.8849555921538759
+                0 1.8849555921538759
+                0 1.8849555921538759
+                0 1.8849555921538759
+                0 1.8849555921538759"></path>
+        </g>
+        <g class="blood" fill="none">
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="lightgray" stroke-width="0.4" stroke-dashoffset="-0.1" stroke-dasharray="2.061946710584651 0.2"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="royalblue" stroke-width="0.4" stroke-dashoffset="-0.1" stroke-dasharray="
+                0 2.261946710584651
+                2.061946710584651 0.2
+                2.061946710584651 0.2
+                2.061946710584651 0.2
+                2.061946710584651 0.2"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="gold" stroke-width="0.6" stroke-dashoffset="-0.1" stroke-dasharray="
+                2.061946710584651 0.2
+                0 2.261946710584651
+                0 2.261946710584651
+                0 2.261946710584651
+                0 2.261946710584651"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="violet" stroke-width="0.6" stroke-dashoffset="-0.1" stroke-dasharray="
+                0 2.261946710584651
+                0 2.261946710584651
+                0 2.261946710584651
+                0 2.261946710584651
+                0 2.261946710584651"></path>
+        </g>
+        <g class="blood" fill="none">
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="lightgray" stroke-width="0.4" stroke-dashoffset="-0.1" stroke-dasharray="2.627433388230814 0.2"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="royalblue" stroke-width="0.4" stroke-dashoffset="-0.1" stroke-dasharray="
+                2.627433388230814 0.2
+                2.627433388230814 0.2
+                2.627433388230814 0.2
+                2.627433388230814 0.2"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="gold" stroke-width="0.6" stroke-dashoffset="-0.1" stroke-dasharray="
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="violet" stroke-width="0.6" stroke-dashoffset="-0.1" stroke-dasharray="
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814"></path>
+        </g>
+        <g class="blood" fill="none">
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="lightgray" stroke-width="0.4" stroke-dashoffset="-0.1" stroke-dasharray="2.627433388230814 0.2"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="royalblue" stroke-width="0.4" stroke-dashoffset="-0.1" stroke-dasharray="
+                0 2.827433388230814
+                2.627433388230814 0.2
+                2.627433388230814 0.2
+                2.627433388230814 0.2"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="gold" stroke-width="0.6" stroke-dashoffset="-0.1" stroke-dasharray="
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="violet" stroke-width="0.6" stroke-dashoffset="-0.1" stroke-dasharray="
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814"></path>
+        </g>
+        <g class="blood" fill="none">
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="lightgray" stroke-width="0.4" stroke-dashoffset="-0.1" stroke-dasharray="2.627433388230814 0.2"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="royalblue" stroke-width="0.4" stroke-dashoffset="-0.1" stroke-dasharray="
+                0 2.827433388230814
+                0 2.827433388230814
+                2.627433388230814 0.2
+                2.627433388230814 0.2"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="gold" stroke-width="0.6" stroke-dashoffset="-0.1" stroke-dasharray="
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="violet" stroke-width="0.6" stroke-dashoffset="-0.1" stroke-dasharray="
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814"></path>
+        </g>
+        <g class="blood" fill="none">
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="lightgray" stroke-width="0.4" stroke-dashoffset="-0.1" stroke-dasharray="2.627433388230814 0.2"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="royalblue" stroke-width="0.4" stroke-dashoffset="-0.1" stroke-dasharray="
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814
+                2.627433388230814 0.2"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="gold" stroke-width="0.6" stroke-dashoffset="-0.1" stroke-dasharray="
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="violet" stroke-width="0.6" stroke-dashoffset="-0.1" stroke-dasharray="
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814"></path>
+        </g>
+        <g class="blood" fill="none">
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="lightgray" stroke-width="0.4" stroke-dashoffset="-0.1" stroke-dasharray="2.627433388230814 0.2"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="royalblue" stroke-width="0.4" stroke-dashoffset="-0.1" stroke-dasharray="
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="gold" stroke-width="0.6" stroke-dashoffset="-0.1" stroke-dasharray="
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814"></path>
+
+            <path d="
+            M 2.5 2.5
+            m 0  -1.8
+            a 1.8 1.8 0 0 1 0 3.6
+            a 1.8 1.8 0 0 1 0 -3.6"
+                stroke="violet" stroke-width="0.6" stroke-dashoffset="-0.1" stroke-dasharray="
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814
+                0 2.827433388230814"></path>
+        </g>
+    </svg>
+    <script>
+        var bloodElems = document.querySelectorAll(".blood");
+
+        function hideAllBloodElem() {
+            for (var bloodElem of bloodElems) {
+                bloodElem.style.display = "none";
+            }
+        }
+
+        window.addEventListener("keydown", function (e) {
+            hideAllBloodElem();
+            bloodElems[e.which - 49].style.display = "";
+        });
+
+        hideAllBloodElem();
+    </script>
+</body>
+
+</html>

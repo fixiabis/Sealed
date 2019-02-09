@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test</title>
+    <script src="js/GridBoard.js"></script>
+    <script src="js/SymtusBoard.js"></script>
+    <script src="js/RelatiBoard.js"></script>
+    <style>
+        body {
+            display: flex;
+            background-color: #f2f2f2;
+            align-items: center;
+            justify-content: center;
+            margin: 0px;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        var board = new RelatiBoard(7, 7);
+        var game = {
+            turn: 0,
+            players: 2,
+            symbols: "OX",
+            nowSymbol: () => game.symbols[
+                game.turn % game.players
+            ]
+        };
+
+        board.viewer.appendIn(document.body);
+        board.viewer.backgroundFixed = true;
+
+        board.viewer.onselect = function (grid) {
+            if (!grid.is("space")) return;
+
+            var sym = game.nowSymbol();
+
+            if (game.turn >= game.players) {
+                if (grid.by("relati", sym).length > 0) {
+                    grid.symbol = sym;
+                } else return;
+            } else {
+                grid.symbol = sym;
+                grid.status = "source";
+            }
+
+            game.turn++;
+            forbidRelati();
+        };
+
+        function relati(grid, list) {
+            var grids = grid.by("relati", grid.symbol);
+            list.push(grid);
+            grids.forEach(function (grid) {
+                if (list.indexOf(grid) > -1) return;
+                relati(grid, list);
+            });
+        }
+
+        function forbidRelati() {
+            var relatiList = [];
+            board.find("forbid").forEach(function (grid) {
+                grid.status = "normal";
+            });
+            board.find("source").forEach(function (grid) {
+                relati(grid, relatiList);
+            });
+            board.find("normal").forEach(function (grid) {
+                if (relatiList.indexOf(grid) < 0) {
+                    grid.status = "forbid";
+                }
+            });
+        }
+
+        function next(sym, step) {
+            var list = [];
+
+            nextGrid(sym).forEach(function (grid) {
+                grid.symbol = sym;
+                forbidRelati();
+
+                var area = { "O": 0, "X": 0 };
+                var next = {
+                    "O": nextGrid("O").length,
+                    "X": nextGrid("X").length
+                };
+                var space = findAreaOwner();
+
+                for (let sym in area) {
+                    space.filter(
+                        area => area.owner === sym
+                    ).forEach(
+                        space => area[sym] += space.space.length
+                    );
+                }
+
+                list.push({
+                    grid: grid,
+                    point: area[sym] * 10 + next[sym] - area["O"] * 10 - next["O"]
+                });
+
+                grid.symbol = "";
+                forbidRelati();
+            });
+
+            if (sym === "O") list.sort((a, b) => a.point - b.point);
+            else list.sort((a, b) => b.point - a.point);
+
+            if (step) {
+                for (var nextStep of list) {
+                    var grid = nextStep.grid;
+                    grid.symbol = sym;
+                    forbidRelati();
+                    console.log(
+                        "  ".repeat(3 - step) +
+                        `${sym} ${nextStep.point} ${grid.crd}`
+                    );
+                    next(sym === "O" ? "X" : "O", step - 1);
+                    grid.symbol = "";
+                    forbidRelati();
+                }
+            }
+
+            return list;
+        }
+
+        function nextGrid(sym) {
+            return board.find("space").filter(function (grid) {
+                return game.turn < game.players || grid.by("relati", sym).length
+            });
+        }
+
+        function findAreaOwner() {
+            var area = [];
+            var visited = {};
+
+            board.find("space").forEach(function (grid) {
+                if (visited[grid.crd]) return;
+                area.push({ space: findArea(grid, visited, []) });
+            });
+
+            area.forEach(function (area) {
+                var grids = area.space;
+                var owner = "";
+
+                grids.forEach(function (grid) {
+                    grid.query("O").forEach(function (grid) {
+                        if (!grid || grid.is("space|forbid")) return;
+
+                        if (owner === "") {
+                            owner = grid.symbol;
+                        } else if (owner !== grid.symbol) {
+                            owner = "public";
+                        }
+                    });
+                });
+
+                area.owner = owner || "unknown";
+            });
+
+            return area;
+        }
+
+        function findArea(grid, visited, space) {
+            space.push(grid);
+            visited[grid.crd] = true;
+            grid.query("O").forEach(function (grid) {
+                if (!grid || !grid.is("space")) return;
+                if (visited[grid.crd]) return;
+                findArea(grid, visited, space);
+            });
+            return space;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Relati</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            background-color: #f2f2f2;
+            width: 100vw;
+            height: 100vh;
+            margin: 0px;
+        }
+
+        body>div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+    <script src="js/GridBoard.js"></script>
+</head>
+
+<body>
+    <div>
+        <svg width="45" height="45" style="transform: scale(12)">
+            <g>
+                <path d="M 0  5 H 45" stroke="#888" stroke-width="0.4"></path>
+                <path d="M 0 10 H 45" stroke="#888" stroke-width="0.4"></path>
+                <path d="M 0 15 H 45" stroke="#888" stroke-width="0.4"></path>
+                <path d="M 0 20 H 45" stroke="#888" stroke-width="0.4"></path>
+                <path d="M 0 25 H 45" stroke="#888" stroke-width="0.4"></path>
+                <path d="M 0 30 H 45" stroke="#888" stroke-width="0.4"></path>
+                <path d="M 0 35 H 45" stroke="#888" stroke-width="0.4"></path>
+                <path d="M 0 30 H 45" stroke="#888" stroke-width="0.4"></path>
+                <path d="M 0 40 H 45" stroke="#888" stroke-width="0.4"></path>
+                <path d="M  5 0 V 45" stroke="#888" stroke-width="0.4"></path>
+                <path d="M 10 0 V 45" stroke="#888" stroke-width="0.4"></path>
+                <path d="M 15 0 V 45" stroke="#888" stroke-width="0.4"></path>
+                <path d="M 20 0 V 45" stroke="#888" stroke-width="0.4"></path>
+                <path d="M 25 0 V 45" stroke="#888" stroke-width="0.4"></path>
+                <path d="M 30 0 V 45" stroke="#888" stroke-width="0.4"></path>
+                <path d="M 35 0 V 45" stroke="#888" stroke-width="0.4"></path>
+                <path d="M 30 0 V 45" stroke="#888" stroke-width="0.4"></path>
+                <path d="M 40 0 V 45" stroke="#888" stroke-width="0.4"></path>
+            </g>
+
+            <g>
+                <path d="
+                M 2.5 2.5
+                m 0 -2
+                a 2 2 0 0 1, 0 4
+                a 2 2 0 0 1, 0 -4
+            "
+                    stroke="lightgray" stroke-width="0.6" fill="lightgray"></path>
+                <path d="
+                M 2.5 2.5
+                m 0 -1.8
+                a 1.8 1.8 0 0 0, -1.8 1.8
+                a 1.8 1.8 0 0 0, 1.8 1.8
+                a 1.8 1.8 0 0 0, 1.8 -1.8
+                a 1.8 1.8 0 0 0, -1.8 -1.8
+            "
+                    stroke="crimson" stroke-width="0.4" fill="none"></path>
+                <path d="M 2.5 0.4 V 4.6" stroke="lightgray" stroke-width="0.4" fill="none"></path>
+                <path d="M 0.4 2.5 H 4.6" stroke="lightgray" stroke-width="0.4" fill="none"></path>
+                <text x="1.6" y="2.8" fill="crimson" style="font-size: 1px; font-family: monospace">Omu</text>
+            </g>
+
+            <g>
+                <path d="
+                M 7.5 2.5
+                m 0 -1.5
+                a 1.5 1.5 0 0 1, 0 3
+                a 1.5 1.5 0 0 1, 0 -3
+            "
+                    stroke="lightgray" stroke-width="0.6" fill="lightgray"></path>
+                <path d="
+                M 7.5 2.5
+                m 0 -1.5
+                a 1.5 1.5 0 0 0, -1.5 1.5
+                a 1.5 1.5 0 0 0, 1.5 1.5
+                a 1.5 1.5 0 0 0, 1.5 -1.5
+                a 1.5 1.5 0 0 0, -1.5 -1.5
+            "
+                    stroke="royalblue" stroke-width="0.3" fill="none"></path>
+                <path d="M 7.5 0.8 V 4.2" stroke="lightgray" stroke-width="0.3" fill="none"></path>
+                <path d="M 5.8 2.5 H 9.2" stroke="lightgray" stroke-width="0.3" fill="none"></path>
+                <text x="6.6" y="2.8" fill="royalblue" style="font-size: 1px; font-family: monospace">Xro</text>
+            </g>
+        </svg>
+    </div>
+    <script>
+        var board = new GridBoard(9, 9);
+    </script>
+</body>
+
+</html>

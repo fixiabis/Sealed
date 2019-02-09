@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Relati</title>
+    <script src="../js/GridBoard.js"></script>
+    <script src="js/RelatiGame.js"></script>
+    <script src="js/RelatiSkin.js"></script>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        var board = new RelatiGame(
+            2, document.body,
+            {
+                relati: {
+                    normal: true,
+                    remote: {
+                        normal: true,
+                        stable: true
+                    }
+                },
+                escape: "source",
+                attack: {
+                    normal: true,
+                    pincer: "O",
+                    bomber: true
+                },
+                defend: true,
+                region: "first"
+            }
+        );
+        addSkin(board);
+    </script>
+</body>
+
+</html>

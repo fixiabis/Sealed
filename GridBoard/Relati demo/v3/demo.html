@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/SVGOperation.js"></script>
+    <script src="js/Relati.js"></script>
+</head>
+
+<body>
+    <script>
+        var boardWidth = 15;
+        var boardHeight = 9;
+        var board = new Relati.RelatiBoard(boardWidth, boardHeight);
+        var player1 = new Relati.RelatiPlayer;
+        var player2 = new Relati.RelatiPlayer;
+        var players = [player1, player2];
+
+        for (var player of players) {
+            for (var i = 0; i < 68; i++) {
+                player.deck.push(new Relati.RelatiCards.Normal(player));
+            }
+        }
+
+        var game = new Relati.RelatiGame(board, players);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Relati</title>
+    <script src="js/SVGOperation.js"></script>
+    <script src="js/GridBoard.js"></script>
+    <script src="js/Relati.js"></script>
+    <style>
+        html,
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            background-color: #f2f2f2;
+        }
+
+        .relati-path {
+            stroke-dashoffset: 0;
+            stroke-dasharray: 15;
+            animation: path 0.5s linear;
+        }
+
+        @keyframes path {
+            0% {
+                stroke-dashoffset: 15;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        var board = new GridBoard(9, 9);
+        var game = new Relati.RelatiGame(board);
+        var player1 = new Relati.RelatiPlayer(game, "O");
+        var player2 = new Relati.RelatiPlayer(game, "X");
+        game.players = [player1, player2];
+        var boardView = new Relati.RelatiView(game, document.body, 5);
+    </script>
+</body>
+
+</html>

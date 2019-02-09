@@ -1,0 +1,29 @@
+{
+  "name": "relati.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/react": "^16.8.2",
+    "@types/react-dom": "^16.8.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "node-sass": "^4.11.0",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/express": "^4.16.1",
+    "@types/socket.io": "^2.1.2",
+    "awesome-typescript-loader": "^5.2.1",
+    "source-map-loader": "^0.2.4",
+    "typescript": "^3.3.1"
+  }
+}

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            color: #2f4d5a;
+            background-color: #efefef;
+            width: 100vw;
+            height: 100vh;
+            margin: 0px;
+        }
+
+        header {
+            color: #efefef;
+            background-color: #2f4d5a;
+            width: 100vw;
+            height: 80px;
+        }
+
+        #title {
+            font-size: 50px;
+            line-height: 80px;
+            margin-left: 25px;
+        }
+
+        main {
+            display: flex;
+            flex-direction: row;
+            width: 100vw;
+            height: calc(100vh - 80px);
+            overflow-y: hidden;
+        }
+
+        canvas {
+            animation: show 1s;
+        }
+
+        #descriptions {
+            width: calc(100vw - (100vh - 80px));
+            height: 100%;
+        }
+
+        .description {
+            width: 80%;
+            height: 50%;
+            margin: 25% 10%;
+        }
+
+        .content {
+            font-size: 20px;
+            width: 100%;
+            height: calc(100% - 80px);
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            width: 100%;
+            height: 80px;
+        }
+
+        .controls div {
+            cursor: pointer;
+            text-align: center;
+            line-height: 80px;
+            width: 80px;
+            height: 80px;
+            transition: all 0.5s;
+        }
+
+        .controls div:hover {
+            color: #efefef;
+            background-color: #2f4d5a;
+        }
+
+        .controls div.no-more:hover {
+            color: #efefef;
+            background-color: #666;
+        }
+
+        @keyframes show {
+            from {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="title">Relati Basic Rules</div>
+    </header>
+    <main>
+        <canvas id="board"></canvas>
+        <div id="descriptions">
+            <div class="description">
+                <div class="content">
+
+                </div>
+                <div class="controls">
+                    <div id="prev" class="no-more">上一個</div>
+                    <div id="next">下一個</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        let boardView = document.querySelector("canvas");
+        let painter = boardView.getContext("2d");
+        let prevButton = document.querySelector("#prev");
+        let nextButton = document.querySelector("#next");
+        let currPage = 0;
+        let descriptionContent = document.querySelector(".description .content");
+        let description = [
+            "遊戲開始時，所有玩家分別標記一枚符號於棋盤中。<br>注意，標記符號時格子必須是空的。",
+            "之後標記符號時，必須標記於自己的符號附近(八個方向)<br>這樣的標記形式稱作連結(Relati)",
+            "遊戲進行到一陣子後，有些格子玩家將可能無法標記<br>當無法繼續標記符號時就輸了",
+            "圖中的範例中，現在輪到了圈方，但是圈方無法標記符號，因此圈方輸了"
+        ];
+        let animation = [
+            function () { cleanBoard(); },
+            function () { drawO(2, 2); drawX(2, 3); },
+            function () { drawO(1, 2); drawX(3, 2); },
+            function () {
+                drawO(2, 1); drawX(3, 1);
+                drawO(2, 0); drawX(1, 3);
+                drawO(0, 2); drawX(3, 3);
+                drawO(3, 0); drawX(4, 1);
+                drawO(0, 3); drawX(1, 4);
+                drawO(0, 4); drawX(4, 0);
+                drawO(1, 1); drawX(2, 4);
+                drawO(0, 0); drawX(3, 4);
+                drawO(1, 0); drawX(4, 3);
+                drawO(0, 1); drawX(4, 2);
+            }
+        ];
+        prevButton.onclick = function () {
+            if (description[currPage - 1]) {
+                currPage--;
+                descriptionContent.innerHTML = description[currPage];
+                if (!description[currPage + 1]) nextButton.classList.add("no-more");
+                else nextButton.classList.remove("no-more");
+                if (!description[currPage - 1]) prevButton.classList.add("no-more");
+                else prevButton.classList.remove("no-more");
+                for (let i = 0; i <= currPage; i++) animation[i]();
+            }
+        };
+        nextButton.onclick = function () {
+            if (description[currPage + 1]) {
+                currPage++;
+                descriptionContent.innerHTML = description[currPage];
+                if (!description[currPage + 1]) nextButton.classList.add("no-more");
+                else nextButton.classList.remove("no-more");
+                if (!description[currPage - 1]) prevButton.classList.add("no-more");
+                else prevButton.classList.remove("no-more");
+                for (let i = 0; i <= currPage; i++) animation[i]();
+            }
+        };
+
+        descriptionContent.innerHTML = description[0];
+
+        boardView.height = (window.innerHeight - 80) * 0.8;
+        boardView.width = boardView.height;
+        boardView.style.margin = (window.innerHeight - 80) / 10 + "px";
+
+        painter.strokeStyle = "#2f4d5a";
+
+        let gridSize = boardView.height / 5;
+
+        function cleanBoard() {
+            painter.fillStyle = "#eee";
+            painter.fillRect(0, 0, boardView.width, boardView.height);
+
+            for (let i = 1; i < 5; i++) {
+                painter.beginPath();
+                painter.moveTo(0, gridSize * i);
+                painter.lineTo(gridSize * 5, gridSize * i);
+                painter.stroke();
+                painter.closePath();
+                painter.beginPath();
+                painter.moveTo(gridSize * i, 0);
+                painter.lineTo(gridSize * i, gridSize * 5);
+                painter.stroke();
+                painter.closePath();
+            }
+        }
+
+        function drawO(x, y) {
+            painter.beginPath();
+            painter.arc(x * gridSize + gridSize / 2, y * gridSize + gridSize / 2, gridSize * 0.8 / 2, 0, 2 * Math.PI);
+            painter.stroke();
+            painter.closePath();
+        }
+
+        function drawX(x, y) {
+            painter.beginPath();
+            painter.moveTo(x * gridSize + gridSize / 10, y * gridSize + gridSize / 10);
+            painter.lineTo((x + 1) * gridSize - gridSize / 10, (y + 1) * gridSize - gridSize / 10);
+            painter.stroke();
+            painter.closePath();
+            painter.beginPath();
+            painter.moveTo((x + 1) * gridSize - gridSize / 10, y * gridSize + gridSize / 10);
+            painter.lineTo(x * gridSize + gridSize / 10, (y + 1) * gridSize - gridSize / 10);
+            painter.stroke();
+            painter.closePath();
+        }
+
+        cleanBoard();
+    </script>
+</body>
+
+</html>

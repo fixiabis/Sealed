@@ -1,0 +1,121 @@
+body {
+    user-select: none;
+    color: #888;
+    background-color: #f2f2f2;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0px;
+}
+
+#header,
+#footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 80px;
+}
+
+#header {
+    font-size: 30px;
+    justify-content: space-between;
+    padding: 10px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+[id^=player] {
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 50px;
+    box-sizing: border-box;
+}
+
+#player1 {
+    border-color: crimson;
+}
+
+#player2 {
+    border-color: royalblue;
+}
+
+#container {
+    width: 100%;
+    height: calc(100vh - 160px);
+    position: relative;
+}
+
+.page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f2f2f2;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    margin: 0px 25px;
+    transition: all 0.5s;
+}
+
+.button:active {
+    transform: scale(0.8);
+}
+
+#start-page {
+    flex-direction: column;
+}
+
+#game-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 90px;
+    width: 220px;
+    height: 100px;
+}
+
+#game-button {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+}
+
+#game-start,
+#message-accept {
+    background-color: #dc143c;
+}
+
+#game-rules,
+#message-reject {
+    background-color: #4169e1;
+}
+
+#game-exit {
+    display: none;
+    background-color: #666;
+}
+
+@-webkit-keyframes show {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes show {
+    from {
+        opacity: 0;
+    }
+}
