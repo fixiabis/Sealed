@@ -1,0 +1,91 @@
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="initial-scale=1.0,user-scalable=no" />
+		<meta name="mobile-web-app-capable" content="yes" />
+		<link href="Pics/Logo.png" rel="shortcut icon">
+		<title>狂言妄語</title>
+		<style>
+			body{
+				margin:0px;overflow:auto;background-color:#222;
+				-moz-user-select:none;-webkit-user-select:none;
+			}
+			header{
+				height:50px;width:100%;color:lightblue;
+				background-color:#000;text-align:center;cursor:pointer;
+				line-height:50px;font-size:30px;overflow:hidden
+			}
+			textarea{
+				outline:none;resize:none;font-size:16px;
+				border:none;height:100px;color:lightblue;
+				border-radius:5px;width:700px;
+				margin-top:10px;background-color:#111
+			}
+			textarea:hover{border-bottom:solid 2px lightblue}
+			textarea:hover::input-placeholder{color:lightblue}
+			textarea:hover::-moz-placeholder{color:lightblue}
+			textarea:hover::-webkit-input-placeholder{color:lightblue}
+			input[type=button]{
+				outline:none;color:lightblue;background-color:#111;width:80px;font-size:16px;
+				border:solid 2px #222;text-indent:0px;border-radius:5px;height:30px
+			}
+			input[type=button]:hover{
+				border:solid 2px lightblue;border-radius:5px
+			}
+			a{color:lightblue}
+			label{opacity:0.6;color:white;white-space:nowrap;}
+			label:hover{opacity:1}
+			input[type=radio],input[type=checkbox]{outline:none;display:none}
+			#Sent div{width:700px}
+			@media screen and (max-width:700px){
+				textarea,#Sent div{width:95%}
+			}
+			@media screen and (max-width:500px){
+				img{width:95%}
+			}
+		</style>
+	</head>
+	<body>
+		<header onclick="location.reload()">狂言妄語</header>
+		<div align="center" id="Sent">
+			<div align="left" style="color:white;margin-top:10px"> 　　發文務必遵守<a href="https://www.facebook.com/communitystandards">FaceBook社群守則</a>，且不得有無意義、情色暴力相關以及明顯針對現實群體、個人的歧視或仇恨言論，並盡量避免使用敏感字詞。違者視情形將加入黑名單中，屢次違反者將會視事態嚴重性公開Facebook Id於<a href="https://fb.me/Wildly.Arrogant">粉絲專頁</a>的置頂貼文，<font color="crimson">在此發文視同同意上述違反事項處份</font>，本專頁不負任何法律責任。<br><br>　　本站對於發文者的個人資料僅記錄Facebook Id，並不會隨意公開發文者的Facebook Id，敬請安心使用。</div>
+			<textarea placeholder="輸入內容"></textarea>
+			<div id="Type" style="margin-top:10px;color:white" align="left">
+				主色選項：
+				<label style="opacity:1">
+					<input type="radio" data-type="0" name="type" checked />狂言妄語
+				</label>
+				<label><input type="radio" data-type="1" name="type"/>甜言蜜語</label>
+				<label><input type="radio" data-type="2" name="type"/>自言自語</label>
+				<label><input type="radio" data-type="3" name="type"/>酸言酸語</label>
+				<label><input type="radio" data-type="4" name="type"/>流言蜚語</label>
+				<label><input type="radio" data-type="5" name="type"/>胡言亂語</label>
+				<label><input type="radio" data-type="6" name="type"/>污言穢語</label>
+				<label><input type="radio" data-type="7" name="type"/>名言勵語</label>
+				<label><input type="radio" data-type="8" name="type"/>荒言謬語</label>
+			</div>
+			<div id="Style" style="margin-top:10px;color:white" align="left">
+				樣式選項：
+				<label style="opacity:1">
+					<input type="radio" data-style="0" name="style" checked />黑底原色
+				</label>
+				<label><input type="radio" data-style="1" name="style"/>原底白色</label>
+				<label><input type="radio" data-style="2" name="style"/>原底黑色</label>
+				<label><input type="radio" data-style="3" name="style"/>黑底白色</label>
+				<label><input type="radio" data-style="4" name="style"/>白底黑色</label>
+			</div>
+			<div style="margin-top:10px;color:white" align="left" id="gifs">
+				<label style="white-space:normal"><input type="checkbox"/>動態圖片：<font>關閉</font>，一行為一畫格(單位為10fps，建議把字打完再把本開關開啟進行觀看結果)</label>
+			</div>
+			<div style="width:100%;height:10px"></div>
+			<canvas width="500" height="300" style="display:none"></canvas>
+			<img/>
+			<div align="right" style="margin:10px 0px">
+				<input type="button" value="送出"/>
+			</div>
+		</div>
+	</body>
+	<script src="Impo/jquery.min.js"></script>
+	<script src="Impo/js.cookie.js"></script>
+	<script src="Impo/gifshot.js"></script>
+</html>
