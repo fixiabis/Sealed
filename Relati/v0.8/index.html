@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Relati</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f2f2f2;
+        }
+    </style>
+    <!-- <script src="js/socket.io.js"></script> -->
+</head>
+
+<body>
+    <div class="page-container">
+        <div id="game-page" class="page">
+            <div id="game-board"></div>
+        </div>
+        <div id="main-page" class="page">
+            <div id="main-title">Relati</div>
+            <div id="main-controls" class="controls">
+                <div id="main-to-game" class="btn to-game-page"></div>
+                <div id="main-to-help" class="btn to-help-page"></div>
+            </div>
+        </div>
+        <div id="help-page" class="page"></div>
+        <div id="message-box" class="none">
+            <div class="controls">
+                <div class="btn check"></div>
+                <div class="btn allow"></div>
+                <div class="btn deny"></div>
+            </div>
+        </div>
+    </div>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

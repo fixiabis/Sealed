@@ -1,0 +1,12 @@
+svg .relati-effect-line {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 15;
+    opacity: 0.3;
+    animation: relati-effect-line 0.25s linear;
+}
+
+@keyframes relati-effect-line {
+    from {
+        stroke-dashoffset: 15;
+    }
+}

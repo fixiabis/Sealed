@@ -1,0 +1,27 @@
+#main-page {
+    & {
+        justify-content: center;
+    }
+
+    #main-title {
+        font-size: 90px;
+        font-family: sans-serif;
+    }
+
+    #main-controls {
+        & {
+            width: 150px;
+            justify-content: space-between;
+        }
+
+        .to-game-page {
+            background-color: crimson;
+            background-image: url(../../svg/play.svg);
+        }
+
+        .to-help-page {
+            background-color: royalblue;
+            background-image: url(../../svg/help.svg);
+        }
+    }
+}
