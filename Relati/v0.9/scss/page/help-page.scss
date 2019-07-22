@@ -1,0 +1,14 @@
+#help-page {
+    #help-desc {
+        width: 100%;
+        height: 60px;
+    }
+
+    #help-board {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: calc(100% - 120px);
+    }
+}

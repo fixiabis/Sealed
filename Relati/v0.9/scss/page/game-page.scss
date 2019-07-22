@@ -1,0 +1,68 @@
+#game-page {
+    #game-players {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 60px;
+    }
+
+    #player-O,
+    #player-X,
+    #player-vs {
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+    }
+
+    #player-O,
+    #player-X {
+        & {
+            box-sizing: border-box;
+            border-radius: 50px;
+            border-width: 5px;
+            border-style: solid;
+        }
+
+        &::after {
+            content: "";
+            display: block;
+            width: 20px;
+            height: 20px;
+            margin-top: 25px;
+            margin-left: 25px;
+        }
+    }
+
+    #player-O {
+        & {
+            border-color: crimson;
+        }
+
+        &::after {
+            background-image: url(../../svg/page/game/player-O.svg);
+        }
+    }
+
+    #player-X {
+        & {
+            border-color: royalblue;
+        }
+
+        &::after {
+            background-image: url(../../svg/page/game/player-X.svg);
+        }
+    }
+
+    #player-vs {
+        background-image: url(../../svg/page/game/player-vs.svg);
+    }
+
+    #game-board {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: calc(100% - 120px);
+    }
+}

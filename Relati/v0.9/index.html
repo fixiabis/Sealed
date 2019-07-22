@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Relati</title>
+    <script src="./js/style.bundle.js"></script>
+    <!-- <script src="js/socket.io.js"></script> -->
+</head>
+
+<body>
+    <div class="page-container">
+        <div id="game-page" class="page">
+            <div id="game-players">
+                <div id="player-O"></div>
+                <div id="player-vs"></div>
+                <div id="player-X"></div>
+            </div>
+            <div id="game-board"></div>
+            <div id="game-controls" class="btn-group">
+                <div id="game-to-main" class="btn to-main-page"></div>
+            </div>
+        </div>
+        <div id="main-page" class="page">
+            <div id="main-title">Relati</div>
+            <div id="main-controls" class="btn-group">
+                <div id="main-to-game" class="btn-r to-game-page"></div>
+                <div id="main-to-help" class="btn-b to-help-page"></div>
+            </div>
+        </div>
+        <div id="help-page" class="page">
+            <div id="help-desc" class="btn-group"></div>
+            <div id="help-board"></div>
+            <div id="help-controls" class="btn-group">
+                <div id="help-to-main" class="btn to-main-page"></div>
+            </div>
+        </div>
+        <div id="message-box" class="none">
+            <div id="message-icon"></div>
+            <div id="message-content"></div>
+            <div class="btn-group">
+                <div id="message-accept" class="btn-r"></div>
+                <div id="message-verify" class="btn-g"></div>
+                <div id="message-reject" class="btn-b"></div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/script.bundle.js"></script>
+</body>
+
+</html>
